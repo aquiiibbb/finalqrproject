@@ -1,41 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './happy.css';
-import { FaHandPointDown } from "react-icons/fa";const ReviewRedirect = () => {
-  const location = useLocation();
+import { FaHandPointDown } from "react-icons/fa";
+
+const ReviewRedirect = () => {
   const navigate = useNavigate();
   const [selectedPlatform, setSelectedPlatform] = useState(null);
-  const [countdown, setCountdown] = useState(8);
 
-  // Real links - replace with actual hotel IDs
-  const googleLink = ' https://www.google.com/travel/search?q=Xpress%20Inn%20%26%20Extended%20Stay%20Marshall%20TX%20Near%20I-20%20E%20%26%20US%20Hwy%2059%2C%20300%20I-20%2C%20Marshall%2C%20TX%2075672%2C%20United%20States&g2lb=4965990%2C72471280%2C72560029%2C72573224%2C72647020%2C72686036%2C72803964%2C72882230%2C72958624%2C73059275%2C73064764%2C73107089%2C73192290%2C73249147&hl=en-IN&gl=in&ssta=1&ts=CAEaRwopEicyJTB4ODYzNmY3YTBiYzllOTBhZDoweDFiOTI4YWE0MWQ5MDg2ODISGhIUCgcI6g8QAhgFEgcI6g8QAhgGGAEyAhAA&qs=CAEyE0Nnb0lnbzNDN01IVW9za2JFQUU4AkIJCYKGkB2kipIbQgkJgoaQHaSKkhs&ap=ugEHcmV2aWV3cw&ictx=111&ved=0CAAQ5JsGahcKEwig14zp-quSAxUAAAAAHQAAAAAQBQ';
+  const googleLink = 'https://www.google.com/travel/search?q=Xpress%20Inn%20%26%20Extended%20Stay%20Marshall%20TX%20Near%20I-20%20E%20%26%20US%20Hwy%2059%2C%20300%20I-20%2C%20Marshall%2C%20TX%2075672%2C%20United%20States&g2lb=4965990%2C72471280%2C72560029%2C72573224%2C72647020%2C72686036%2C72803964%2C72882230%2C72958624%2C73059275%2C73064764%2C73107089%2C73192290%2C73249147&hl=en-IN&gl=in&ssta=1&ts=CAEaRwopEicyJTB4ODYzNmY3YTBiYzllOTBhZDoweDFiOTI4YWE0MWQ5MDg2ODISGhIUCgcI6g8QAhgFEgcI6g8QAhgGGAEyAhAA&qs=CAEyE0Nnb0lnbzNDN01IVW9za2JFQUU4AkIJCYKGkB2kipIbQgkJgoaQHaSKkhs&ap=ugEHcmV2aWV3cw&ictx=111&ved=0CAAQ5JsGahcKEwig14zp-quSAxUAAAAAHQAAAAAQBQ';
   const tripAdvisorLink = 'https://www.tripadvisor.com/Hotel_Review-g56236-d28804568-Reviews-Xpress_Inn_Extended_Stays-Marshall_Texas.html';
-
-  // Auto redirect countdown
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCountdown(prev => {
-        if (prev <= 1) {
-          navigate('/');
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 100000);
-
-    return () => clearInterval(timer);
-  }, [navigate]);
 
   const handleGoogleReview = () => {
     setSelectedPlatform('google');
-    
-    // Save feedback first
     saveFeedback('google');
-    
-    // Open Google review in new tab
     window.open(googleLink, '_blank');
     
-    // Redirect to thank you page
     setTimeout(() => {
       navigate('/thank-you', { 
         state: { 
@@ -48,14 +27,9 @@ import { FaHandPointDown } from "react-icons/fa";const ReviewRedirect = () => {
 
   const handleTripAdvisorReview = () => {
     setSelectedPlatform('tripadvisor');
-    
-    // Save feedback first
     saveFeedback('tripadvisor');
-    
-    // Open TripAdvisor review in new tab
     window.open(tripAdvisorLink, '_blank');
     
-    // Redirect to thank you page
     setTimeout(() => {
       navigate('/thank-you', { 
         state: { 
@@ -89,18 +63,12 @@ import { FaHandPointDown } from "react-icons/fa";const ReviewRedirect = () => {
       }
     } catch (error) {
       console.error('Error saving feedback:', error);
-      // Don't block the user flow if API fails
     }
-  };
-
-  const handleSkip = () => {
-    navigate('/');
   };
 
   return (
     <div className="review-redirect-container">
       <div className="review-redirect-card">
-        {/* Success Animation */}
         <div className="success-animation">
           <div className="success-icon">
             <div className="checkmark">✓</div>
@@ -108,7 +76,6 @@ import { FaHandPointDown } from "react-icons/fa";const ReviewRedirect = () => {
           <div className="success-ripple"></div>
         </div>
         
-        {/* Main Content */}
         <h2>Thank You!</h2>
         <p className="subtitle">We're thrilled you had a great stay! 🎉</p>
         
@@ -117,7 +84,6 @@ import { FaHandPointDown } from "react-icons/fa";const ReviewRedirect = () => {
         </p>
         <p style={{fontSize:"50px",color:"#FFD700"}}><FaHandPointDown /></p>                     
         
-        {/* Review Options */}
         <div className="review-options">
           <button 
             className={`review-btn google-btn ${selectedPlatform === 'google' ? 'clicked' : ''}`}
@@ -146,10 +112,10 @@ import { FaHandPointDown } from "react-icons/fa";const ReviewRedirect = () => {
           >
             <div className="btn-icon tripadvisor-icon">
               <img 
-                               style={{height:"40px", width:"40px"}}
-                               src="https://cdn-icons-png.freepik.com/512/6124/6124989.png" 
-                               alt="TripAdvisor" 
-                           />
+                style={{height:"40px", width:"40px"}}
+                src="https://cdn-icons-png.freepik.com/512/6124/6124989.png" 
+                alt="TripAdvisor" 
+              />
             </div>
             <div className="btn-content">
               <div className="btn-title">TripAdvisor</div>
@@ -159,7 +125,6 @@ import { FaHandPointDown } from "react-icons/fa";const ReviewRedirect = () => {
           </button>
         </div>
         
-        {/* Loading State */}
         {selectedPlatform && (
           <div className="loading-message">
             <div className="spinner"></div>
@@ -167,10 +132,6 @@ import { FaHandPointDown } from "react-icons/fa";const ReviewRedirect = () => {
           </div>
         )}
         
-        {/* Action Buttons */}
-       
-        
-        {/* Footer */}
         <div className="contact-info">
           <div>300 / 20 • +19234718277</div>
           <div>https://xpressinnmarshall.com/</div>

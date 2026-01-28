@@ -9,17 +9,12 @@ export default function Home() {
     const [showScanner, setShowScanner] = useState(false);
     const videoRef = useRef(null);
 
-    // QR data for the code
-    const qrData = window.location.origin + '/FeedbackSurvey';
-
     const handleQRClick = () => {
         navigate('/FeedbackSurvey');
     };
 
-    // QR Scanner functionality
     useEffect(() => {
         if (showScanner && videoRef.current) {
-            // Simple camera access for QR scanning
             navigator.mediaDevices.getUserMedia({ video: true })
                 .then(stream => {
                     videoRef.current.srcObject = stream;

@@ -20,13 +20,6 @@ const PrivateFeedback = () => {
     }));
   };
 
-  const handleRating = (star) => {
-    setFormData(prev => ({
-      ...prev,
-      rating: star
-    }));
-  };
-
   const handleSubmit = () => {
     if (!formData.name.trim()) {
       alert('Please enter your name');
@@ -153,9 +146,6 @@ const PrivateFeedback = () => {
           />
         </div>
 
-        {/* Star Rating */}
-       
-
         {/* Message Textarea */}
         <div style={{ marginBottom: '20px' }}>
           <label style={{ display: 'block', marginBottom: '10px', fontWeight: 'bold' }}>
@@ -178,8 +168,6 @@ const PrivateFeedback = () => {
             }}
           />
         </div>
-
-        
 
         {/* Submit Button */}
         <button 
